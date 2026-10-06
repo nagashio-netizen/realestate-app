@@ -4,17 +4,34 @@
 
 ## プロジェクト概要
 
-不動産アプリ（realestate-app）。現在は初期状態で、ソースコードはまだ存在しない。
+不動産管理Webアプリ（realestate-app）。Supabase 認証（メールアドレス＋パスワード）で会員登録・ログインし、ログイン後に物件一覧を表示する。
 
-機能・画面構成が決まったら、このセクションに目的と主な機能を追記すること。
+- `/login`・`/signup` … ログイン・会員登録画面（ログイン済みなら `/properties` へリダイレクト）
+- `/properties` … 物件一覧（未ログインなら `/login` へリダイレクト）。物件はダミーデータ（`src/data/properties.js`）
+- その他のパスは `/properties` へリダイレクト
 
 ## 技術スタック
 
-未定。採用する言語・フレームワーク・データ保存方法が決まったら、ここに追記する。
+- React + Vite、ルーティングは react-router-dom
+- 認証: Supabase（`@supabase/supabase-js`）
+- Supabase の接続情報は `.env`（`VITE_SUPABASE_URL`・`VITE_SUPABASE_PUBLISHABLE_KEY`）で管理する。`.env` はコミットせず、雛形は `.env.example`
+- ブラウザに公開してよいのは Publishable key だけ。Secret key（service_role）はフロントエンドに置かない
+
+## 構成
+
+- `src/lib/supabaseClient.js` … Supabase クライアントの生成
+- `src/contexts/AuthContext.jsx` … ログイン状態の共有（`useAuth()` で session・signUp・signIn・signOut を取得）
+- `src/components/ProtectedRoute.jsx` … `ProtectedRoute`（要ログイン）と `GuestRoute`（未ログイン専用）
+- `src/pages/` … 各画面（Login・Signup・Properties）
 
 ## コマンド
 
-未定。開発サーバーの起動・ビルド・テスト・Lint のコマンドを導入したら、その都度ここに追記する。
+- `npm install` … 依存関係のインストール
+- `npm run dev` … 開発サーバー起動（http://localhost:5173）
+- `npm run build` … 本番ビルド（`dist/` に出力）
+- `npm run preview` … ビルド結果をローカルで確認
+
+テストは未導入。
 
 ## 開発方針
 

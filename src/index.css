@@ -1,0 +1,163 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  background: #f4f5f7;
+  color: #222;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+/* ログイン・会員登録画面 */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 360px;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.auth-form input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.message {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.message.error {
+  color: #dc2626;
+}
+
+.message.notice {
+  color: #15803d;
+}
+
+.switch {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* 物件一覧画面 */
+.properties-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-user .email {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.header-user button {
+  background: #6b7280;
+}
+
+.property-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.property-card {
+  padding: 1.25rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.property-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.property-card .rent {
+  margin: 0 0 0.25rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.property-card .rent span {
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: #555;
+}
+
+.property-card .area {
+  margin: 0;
+  color: #555;
+}
