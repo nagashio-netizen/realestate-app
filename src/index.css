@@ -161,3 +161,58 @@ button:disabled {
   margin: 0;
   color: #555;
 }
+
+button.secondary {
+  background: #6b7280;
+}
+
+button.danger {
+  background: #dc2626;
+}
+
+.toolbar {
+  margin-bottom: 1.5rem;
+}
+
+.empty {
+  text-align: center;
+  color: #555;
+  margin-top: 3rem;
+}
+
+.card-actions,
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.card-actions button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* 物件の登録・編集フォーム */
+.property-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.property-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.property-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.toolbar .property-card {
+  max-width: 420px;
+}

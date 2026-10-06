@@ -4,16 +4,17 @@
 
 ## プロジェクト概要
 
-不動産管理Webアプリ（realestate-app）。Supabase 認証（メールアドレス＋パスワード）で会員登録・ログインし、ログイン後に物件一覧を表示する。
+不動産管理Webアプリ（realestate-app）。Supabase 認証（メールアドレス＋パスワード）で会員登録・ログインし、ログイン後に物件の一覧表示・追加・編集・削除を行う。
 
 - `/login`・`/signup` … ログイン・会員登録画面（ログイン済みなら `/properties` へリダイレクト）
-- `/properties` … 物件一覧（未ログインなら `/login` へリダイレクト）。物件はダミーデータ（`src/data/properties.js`）
+- `/properties` … 物件一覧（未ログインなら `/login` へリダイレクト）。物件は Supabase の `properties` テーブルで管理し、各ユーザーは自分が登録した物件だけを扱える（RLS で制御）
 - その他のパスは `/properties` へリダイレクト
 
 ## 技術スタック
 
 - React + Vite、ルーティングは react-router-dom
-- 認証: Supabase（`@supabase/supabase-js`）
+- 認証・データベース: Supabase（`@supabase/supabase-js`）
+- テーブル定義は `supabase/migrations/` の SQL で管理する。スキーマを変える場合は新しい SQL ファイルを追加し、Supabase ダッシュボードの SQL Editor で実行する
 - Supabase の接続情報は `.env`（`VITE_SUPABASE_URL`・`VITE_SUPABASE_PUBLISHABLE_KEY`）で管理する。`.env` はコミットせず、雛形は `.env.example`
 - ブラウザに公開してよいのは Publishable key だけ。Secret key（service_role）はフロントエンドに置かない
 
@@ -21,7 +22,9 @@
 
 - `src/lib/supabaseClient.js` … Supabase クライアントの生成
 - `src/contexts/AuthContext.jsx` … ログイン状態の共有（`useAuth()` で session・signUp・signIn・signOut を取得）
+- `src/lib/propertiesApi.js` … 物件テーブルの取得・追加・更新・削除
 - `src/components/ProtectedRoute.jsx` … `ProtectedRoute`（要ログイン）と `GuestRoute`（未ログイン専用）
+- `src/components/PropertyForm.jsx` … 物件の登録・編集フォーム
 - `src/pages/` … 各画面（Login・Signup・Properties）
 
 ## コマンド
