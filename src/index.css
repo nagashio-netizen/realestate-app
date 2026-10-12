@@ -133,7 +133,9 @@ button:disabled {
 }
 
 .property-card {
-  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -160,6 +162,16 @@ button:disabled {
 .property-card .area {
   margin: 0;
   color: #555;
+}
+
+.property-card-body {
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.property-card .date {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #777;
 }
 
 button.secondary {
@@ -213,6 +225,242 @@ button.danger {
   font-size: 1rem;
 }
 
-.toolbar .property-card {
-  max-width: 420px;
+.form-panel {
+  max-width: 480px;
+  padding: 1.25rem;
+}
+
+.form-panel h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.property-form .checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-image {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.form-image-controls {
+  display: flex;
+  flex: 1;
+  min-width: 200px;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-image-controls input[type='file'] {
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+/* 物件画像（未登録なら NO IMAGE） */
+.property-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+
+.no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.property-image.preview {
+  width: 160px;
+  border-radius: 6px;
+}
+
+.property-image.thumb {
+  width: 80px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+}
+
+/* 公開状態・所有者のバッジ */
+.badge {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.badge.public {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge.private {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.badge.others {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* 検索・絞り込み・並べ替え */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filters label,
+.filter-rent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+}
+
+.filter-keyword {
+  flex: 1;
+  min-width: 180px;
+}
+
+.filter-rent {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.filter-rent legend {
+  width: 100%;
+  margin-bottom: 0.3rem;
+  padding: 0;
+}
+
+.filter-rent input {
+  width: 7.5rem;
+}
+
+.filters input,
+.filters select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+/* 件数と表示切り替え */
+.list-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.count {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.view-toggle {
+  display: flex;
+}
+
+.view-toggle button {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 0;
+}
+
+.view-toggle button:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.view-toggle button:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.view-toggle button.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* 一覧（表）表示 */
+.table-wrapper {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.property-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.property-table th,
+.property-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.property-table th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #444;
+}
+
+.property-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.property-table .name {
+  font-weight: bold;
+  white-space: normal;
+  min-width: 10rem;
+}
+
+.property-table .rent {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.property-table .badge {
+  margin-bottom: 0;
+}
+
+.property-table .card-actions {
+  margin-top: 0;
 }

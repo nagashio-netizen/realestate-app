@@ -4,10 +4,10 @@
 
 ## プロジェクト概要
 
-不動産管理Webアプリ（realestate-app）。Supabase 認証（メールアドレス＋パスワード）で会員登録・ログインし、ログイン後に物件の一覧表示・追加・編集・削除を行う。
+不動産管理Webアプリ（realestate-app）。Supabase 認証（メールアドレス＋パスワード）で会員登録・ログインし、ログイン後に物件の一覧表示・追加・編集・削除を行う。物件には画像を添付でき、検索・絞り込み・並べ替え、タイル／一覧の表示切り替えができる。
 
 - `/login`・`/signup` … ログイン・会員登録画面（ログイン済みなら `/properties` へリダイレクト）
-- `/properties` … 物件一覧（未ログインなら `/login` へリダイレクト）。物件は Supabase の `properties` テーブルで管理し、各ユーザーは自分が登録した物件だけを扱える（RLS で制御）
+- `/properties` … 物件一覧（未ログインなら `/login` へリダイレクト）。物件は Supabase の `properties` テーブルで管理し、各ユーザーは自分が登録した物件だけを編集・削除できる。公開フラグ（`is_public`）を立てた物件は他のユーザーも閲覧できる（RLS で制御）
 - その他のパスは `/properties` へリダイレクト
 
 ## 技術スタック
@@ -15,6 +15,7 @@
 - React + Vite、ルーティングは react-router-dom
 - 認証・データベース: Supabase（`@supabase/supabase-js`）
 - テーブル定義は `supabase/migrations/` の SQL で管理する。スキーマを変える場合は新しい SQL ファイルを追加し、Supabase ダッシュボードの SQL Editor で実行する
+- 物件画像は Supabase Storage の非公開バケット `property-images` に `<ユーザーID>/<ファイル名>` で保存し、署名付き URL で表示する
 - Supabase の接続情報は `.env`（`VITE_SUPABASE_URL`・`VITE_SUPABASE_PUBLISHABLE_KEY`）で管理する。`.env` はコミットせず、雛形は `.env.example`
 - ブラウザに公開してよいのは Publishable key だけ。Secret key（service_role）はフロントエンドに置かない
 
@@ -22,9 +23,13 @@
 
 - `src/lib/supabaseClient.js` … Supabase クライアントの生成
 - `src/contexts/AuthContext.jsx` … ログイン状態の共有（`useAuth()` で session・signUp・signIn・signOut を取得）
-- `src/lib/propertiesApi.js` … 物件テーブルの取得・追加・更新・削除
+- `src/lib/propertiesApi.js` … 物件テーブルと物件画像の取得・追加・更新・削除
+- `src/lib/propertyFilters.js` … 検索・絞り込み・並べ替えの処理
+- `src/hooks/useViewMode.js` … タイル／一覧の表示形式（localStorage に保存し、ログアウト後も維持）
 - `src/components/ProtectedRoute.jsx` … `ProtectedRoute`（要ログイン）と `GuestRoute`（未ログイン専用）
-- `src/components/PropertyForm.jsx` … 物件の登録・編集フォーム
+- `src/components/PropertyForm.jsx` … 物件の登録・編集フォーム（画像・公開フラグを含む）
+- `src/components/PropertyFilters.jsx` … 検索・絞り込み・並べ替えの入力欄
+- `src/components/PropertyImage.jsx` … 物件画像（未登録なら NO IMAGE を表示）
 - `src/pages/` … 各画面（Login・Signup・Properties）
 
 ## コマンド
